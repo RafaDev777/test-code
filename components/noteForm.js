@@ -31,15 +31,19 @@ class NoteForm extends HTMLElement {
 		const form = this.shadowRoot.querySelector('form');
 		const inputTitle = form.querySelector('#note_title');
 		const inputBody = form.querySelector('#note_body');
+		const titleRegex = /\d/;
 
 		inputTitle.addEventListener('input', () => {
-			if (!inputTitle.validity.valid) {
-				inputTitle.setCustomValidity('Cannot submit empty title');
+			const titleValue = inputTitle.value.trim();
+			if (!titleValue) {
+			  inputTitle.setCustomValidity('Cannot submit empty title');
+			} else if (!titleRegex.test(titleValue)) {
+			  inputTitle.setCustomValidity('Title must contain at least one number');
 			} else {
-				inputTitle.setCustomValidity('');
+			  inputTitle.setCustomValidity('');
 			}
-		});
-
+		  });
+		  
 		inputBody.addEventListener('input', () => {
 			if (!inputBody.validity.valid) {
 				inputBody.setCustomValidity('Cannot submit empty description');
