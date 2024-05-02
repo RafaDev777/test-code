@@ -43,9 +43,9 @@ class NoteForm extends HTMLElement {
 			  inputTitle.setCustomValidity('');
 			}
 		  });
-		  
+
 		inputBody.addEventListener('input', () => {
-			if (!inputBody.validity.valid) {
+			if (!inputBody.value.trim()) {
 				inputBody.setCustomValidity('Cannot submit empty description');
 			} else {
 				inputBody.setCustomValidity('');
